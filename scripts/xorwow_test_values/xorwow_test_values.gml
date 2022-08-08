@@ -15,6 +15,10 @@ function xorwow_test_values() {
 	assert(is_int64(seed.d), "XorWow core type drift d");
 	assert(is_int64(seed.e), "XorWow core type drift e");
 	assert(is_int64(seed.counter), "XorWow core type drift counter");
+	repeat (1000) {
+		assert_in_range(seed.srandom(0.5), 0, 0.5, "XorWow core srandom out of range");
+		assert_in_range(seed.sirandom(20), 0, 20, "XorWow core sirandom out of range");
+	}
 	#endregion
 	
 	#region XorShift32
@@ -24,6 +28,10 @@ function xorwow_test_values() {
 	assert_is(xrandom_get_seed(), seed, "XorShift32 set seed failed");
 	__xorwow_test_values__("XorShift32", tries);
 	assert(is_int64(seed.a), "XorShift32 core type drift a");
+	repeat (1000) {
+		assert_in_range(seed.srandom(0.5), 0, 0.5, "XorShift32 core srandom out of range");
+		assert_in_range(seed.sirandom(20), 0, 20, "XorShift32 core sirandom out of range");
+	}
 	#endregion
 	
 	#region XorShift128
@@ -36,5 +44,9 @@ function xorwow_test_values() {
 	assert(is_int64(seed.b), "XorShift128 core type drift b");
 	assert(is_int64(seed.c), "XorShift128 core type drift c");
 	assert(is_int64(seed.d), "XorShift128 core type drift d");
+	repeat (1000) {
+		assert_in_range(seed.srandom(0.5), 0, 0.5, "XorShift128 core srandom out of range");
+		assert_in_range(seed.sirandom(20), 0, 20, "XorShift128 core sirandom out of range");
+	}
 	#endregion
 }

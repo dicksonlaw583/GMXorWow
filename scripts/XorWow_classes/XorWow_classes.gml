@@ -163,7 +163,7 @@ function XorWow() : __XorSeed__() constructor {
 	///@param {real} n
 	///@desc Seeded replacement for random(n)
 	static srandom = function(n) {
-		return real(__rand__())/real($FFFFFFFF);
+		return real(__rand__())/real($FFFFFFFF)*n;
 	};
 	
 	///@func sirandom(n)
@@ -271,7 +271,7 @@ function XorShift32() : __XorSeed__() constructor {
 	///@param {real} n
 	///@desc Seeded replacement for random(n)
 	static srandom = function(n) {
-		return real(__rand__())/real($FFFFFFFF);
+		return real(__rand__())/real($FFFFFFFF)*n;
 	};
 	
 	///@func sirandom(n)
@@ -361,7 +361,7 @@ function XorShift128() : __XorSeed__() constructor {
 	///@param {real} n
 	///@desc Seeded replacement for random(n)
 	static srandom = function(n) {
-		return real(__rand__())/real($FFFFFFFF);
+		return real(__rand__())/real($FFFFFFFF)*n;
 	};
 	
 	///@func sirandom(n)
