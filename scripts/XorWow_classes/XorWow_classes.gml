@@ -133,6 +133,13 @@ function XorWow() : __XorSeed__() constructor {
 		return { a: a, b: b, c: c, d: d, e: e, counter: counter };
 	};
 	
+	///@func clone()
+	///@return {Struct.XorWow}
+	///@desc Return a clone of this seed.
+	static clone = function() {
+		return new XorWow(toArray());
+	};
+	
 	///@func srandomize()
 	///@desc Randomize this seed
 	static srandomize = function() {
@@ -263,6 +270,13 @@ function XorShift32() : __XorSeed__() constructor {
 		return { a: a };
 	};
 	
+	///@func clone()
+	///@return {Struct.XorWow}
+	///@desc Return a clone of this seed.
+	static clone = function() {
+		return new XorShift32(toArray());
+	};
+	
 	///@func srandomize()
 	///@desc Randomize this seed
 	static srandomize = function() {
@@ -344,6 +358,13 @@ function XorShift128() : __XorSeed__() constructor {
 	///@desc Return this seed's state values as a struct
 	static toStruct = function() {
 		return { a: a, b: b, c: c, d: d };
+	};
+	
+	///@func clone()
+	///@return {Struct.XorWow}
+	///@desc Return a clone of this seed.
+	static clone = function() {
+		return new XorShift128(toArray());
 	};
 	
 	///@func srandomize()
@@ -523,3 +544,5 @@ function xarray_shuffle(array) {
 
 // Initialize global seed randomly
 global.__xorshift_state__ = new XorWow();
+
+
