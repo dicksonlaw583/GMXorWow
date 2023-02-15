@@ -1,5 +1,6 @@
 ///@func __xorwow_test_values__(label, tries)
 ///@param {string} label The label of the seed type to use for error messages
+///@param {real} tries The number of retries
 function __xorwow_test_values__(label, tries) {
 	var got;
 	
@@ -95,3 +96,4 @@ function __xorwow_test_values__(label, tries) {
 	}
 	#endregion
 }
+

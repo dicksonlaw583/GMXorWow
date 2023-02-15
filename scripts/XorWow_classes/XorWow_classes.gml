@@ -467,10 +467,11 @@ function xrandomize() {
 	global.__xorshift_state__.srandomize();
 }
 
-///@func xrandom_get_seed()
-///@desc Return the currently used seed
-function xrandom_get_seed() {
-	return global.__xorshift_state__;
+///@func xrandom_get_seed([noClone])
+///@param {Bool} [noClone] OPTIONAL: Specify true here to get the seed directly instead of a clone of it.
+///@desc Return a clone of the currently used seed (false) or the currently used seed (true)
+function xrandom_get_seed(noClone=false) {
+	return noClone ? global.__xorshift_state__ : global.__xorshift_state__.clone();
 }
 
 ///@func xrandom_set_seed(seed)
