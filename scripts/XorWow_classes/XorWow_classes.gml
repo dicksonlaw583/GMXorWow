@@ -4,6 +4,7 @@
 Descendants should override the following:
 - toArray()
 - toStruct()
+- clone()
 - srandomize()
 - srandom(n)
 - sirandom(n)
@@ -305,7 +306,7 @@ function XorShift32() : __XorSeed__() constructor {
 	};
 	
 	///@func clone()
-	///@return {Struct.XorWow}
+	///@return {Struct.XorShift32}
 	///@desc Return a clone of this seed.
 	static clone = function() {
 		return new XorShift32(toArray());
@@ -395,7 +396,7 @@ function XorShift128() : __XorSeed__() constructor {
 	};
 	
 	///@func clone()
-	///@return {Struct.XorWow}
+	///@return {Struct.XorShift128}
 	///@desc Return a clone of this seed.
 	static clone = function() {
 		return new XorShift128(toArray());
