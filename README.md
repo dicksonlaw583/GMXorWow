@@ -1,10 +1,10 @@
 # GMXorWow
 
-This is a GameMaker Studio 2.3 implementation of [George Marsaglia's XorWow, XorShift32 and XorShift128 algorithms](https://www.jstatsoft.org/article/view/v008i14). Using only 32-bit unsigned integer operations at its core, this library lets you generate pseudorandom numbers consistently across all exports given the same starting seed. It also adds the ability to create seeds using strings and set up many independent generators in parallel.
+This is a GameMaker 2022 implementation of [George Marsaglia's XorWow, XorShift32 and XorShift128 algorithms](https://www.jstatsoft.org/article/view/v008i14). Using only 32-bit unsigned integer operations at its core, this library lets you generate pseudorandom numbers consistently across all exports given the same starting seed. It also adds the ability to create seeds using strings and set up many independent generators in parallel.
 
 ## Requirements
 
-GameMaker Studio 2.3.0 or above.
+GameMaker 2022.1 or above. 2022 LTS is also supported.
 
 ## Installation
 
@@ -24,7 +24,8 @@ GMXorWow sets up a randomized global-level seed for you by default. To use it fo
 | `irandom_range(m, n)` | `xirandom_range(m, n)` |
 | `ds_list_shuffle(list)` | `xds_list_shuffle(list)` |
 | `ds_grid_shuffle(grid)` | `xds_grid_shuffle(grid)` |
-| `array_shuffle(array)` | `xarray_shuffle(array)` |
+| `array_shuffle(array, [offset], [length])` | `xarray_shuffle(array, [offset], [length])` |
+| `array_shuffle_ext(array, [offset], [length])` | `xarray_shuffle_ext(array, [offset], [length])` |
 
 ### Independent Seeds
 
@@ -50,5 +51,6 @@ y = seed.sirandom(room_height);
 | `irandom_range(m, n)` | `seed.sirandom_range(m, n)` |
 | `ds_list_shuffle(list)` | `seed.sds_list_shuffle(list)` |
 | `ds_grid_shuffle(grid)` | `seed.sds_grid_shuffle(grid)` |
-| `array_shuffle(array)` | `seed.sarray_shuffle(array)` |
+| `array_shuffle(array, [offset], [length])` | `seed.sarray_shuffle(array, [offset], [length])` |
+| `array_shuffle_ext(array, [offset], [length])` | `seed.array_shuffle_ext(array, [offset], [length])` |
 
