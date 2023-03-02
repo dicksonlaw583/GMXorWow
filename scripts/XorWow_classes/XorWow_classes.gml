@@ -48,7 +48,7 @@ function __XorSeed__() constructor {
 	};
 	
 	///@func schoose(...)
-	///@
+	///@return {Any*}
 	///@desc Seeded replacement for choose(...)
 	static schoose = function() {
 		return argument[sirandom(argument_count-1)];
@@ -88,6 +88,7 @@ function __XorSeed__() constructor {
 	///@param {array} array
 	///@param {real} [offset]
 	///@param {real} [length]
+	///@return {Array<Any*>}
 	///@desc Seeded replacement for array_shuffle(array, [offset], [length])
 	static sarray_shuffle = function(array, offset=0, length=infinity) {
 		//Feather disable GM1061
