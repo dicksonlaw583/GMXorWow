@@ -111,8 +111,6 @@ function __XorSeed__() constructor {
 	///@desc Seeded replacement for array_shuffle_ext(array, [offset], [length])
 	static sarray_shuffle_ext = function(array, offset=0, length=infinity) {
 		//Feather disable GM1061
-		var nSwaps = 0;
-		var revOffset = 0;
 		var n = array_length(array),
 			iStep = sign(length),
 			iFrom = (offset < 0) ? n+offset : offset,
@@ -124,11 +122,8 @@ function __XorSeed__() constructor {
 				var swapTemp = array[i];
 				array[@i] = array[i2];
 				array[@i2] = swapTemp;
-				nSwaps += 2;
 			}
-			revOffset -= iStep;
 		}
-		return nSwaps;
 	};
 }
 
