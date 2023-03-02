@@ -4,6 +4,7 @@
 Descendants should override the following:
 - toArray()
 - toStruct()
+- clone()
 - srandomize()
 - srandom(n)
 - sirandom(n)
@@ -47,7 +48,7 @@ function __XorSeed__() constructor {
 	};
 	
 	///@func schoose(...)
-	///@
+	///@return {Any*}
 	///@desc Seeded replacement for choose(...)
 	static schoose = function() {
 		return argument[sirandom(argument_count-1)];
@@ -83,16 +84,46 @@ function __XorSeed__() constructor {
 		}
 	};
 	
-	///@func sarray_shuffle(array)
+	///@func sarray_shuffle(array, [offset], [length])
 	///@param {array} array
-	///@desc Seeded replacement for array_shuffle(array)
-	static sarray_shuffle = function(array) {
+	///@param {real} [offset]
+	///@param {real} [length]
+	///@return {Array<Any*>}
+	///@desc Seeded replacement for array_shuffle(array, [offset], [length])
+	static sarray_shuffle = function(array, offset=0, length=infinity) {
 		//Feather disable GM1061
-		for (var i = array_length(array)-1; i > 0; --i) {
-			var j = sirandom(i);
-			var temp = array[i];
-			array[@i] = array[j];
-			array[@j] = temp;
+		var result = [];
+		var n = array_length(array),
+			iStep = sign(length),
+			iFrom = (offset < 0) ? n+offset : offset,
+			iTo = clamp(iFrom+length-iStep, 0, n-1),
+			iStopAt = iTo+iStep;
+		for (var i = iFrom; i != iStopAt; i += iStep) {
+			array_push(result, array[i]);
+		}
+		sarray_shuffle_ext(result);
+		return result;
+	};
+	
+	///@func sarray_shuffle_ext(array, [offset], [length])
+	///@param {array} array
+	///@param {real} [offset]
+	///@param {real} [length]
+	///@desc Seeded replacement for array_shuffle_ext(array, [offset], [length])
+	static sarray_shuffle_ext = function(array, offset=0, length=infinity) {
+		//Feather disable GM1061
+		var n = array_length(array),
+			iStep = sign(length),
+			iFrom = (offset < 0) ? n+offset : offset,
+			iTo = clamp(iFrom+length-iStep, 0, n-1),
+			iStopAt = iTo+iStep;
+		for (var i = iFrom; i != iStopAt; i += iStep) {
+			var i2 = (iStep > 0) ? sirandom_range(i, iTo) : sirandom_range(iTo, i);
+			if (array[i] != array[i2]) {
+				var swapTemp = array[i];
+				array[@i] = array[i2];
+				array[@i2] = swapTemp;
+			}
 		}
 	};
 }
@@ -131,6 +162,13 @@ function XorWow() : __XorSeed__() constructor {
 	///@desc Return this seed's state values as a struct
 	static toStruct = function() {
 		return { a: a, b: b, c: c, d: d, e: e, counter: counter };
+	};
+	
+	///@func clone()
+	///@return {Struct.XorWow}
+	///@desc Return a clone of this seed.
+	static clone = function() {
+		return new XorWow(toArray());
 	};
 	
 	///@func srandomize()
@@ -263,6 +301,13 @@ function XorShift32() : __XorSeed__() constructor {
 		return { a: a };
 	};
 	
+	///@func clone()
+	///@return {Struct.XorShift32}
+	///@desc Return a clone of this seed.
+	static clone = function() {
+		return new XorShift32(toArray());
+	};
+	
 	///@func srandomize()
 	///@desc Randomize this seed
 	static srandomize = function() {
@@ -344,6 +389,13 @@ function XorShift128() : __XorSeed__() constructor {
 	///@desc Return this seed's state values as a struct
 	static toStruct = function() {
 		return { a: a, b: b, c: c, d: d };
+	};
+	
+	///@func clone()
+	///@return {Struct.XorShift128}
+	///@desc Return a clone of this seed.
+	static clone = function() {
+		return new XorShift128(toArray());
 	};
 	
 	///@func srandomize()
@@ -446,10 +498,11 @@ function xrandomize() {
 	global.__xorshift_state__.srandomize();
 }
 
-///@func xrandom_get_seed()
-///@desc Return the currently used seed
-function xrandom_get_seed() {
-	return global.__xorshift_state__;
+///@func xrandom_get_seed([noClone])
+///@param {Bool} [noClone] OPTIONAL: Specify true here to get the seed directly instead of a clone of it.
+///@desc Return a clone of the currently used seed (false) or the currently used seed (true)
+function xrandom_get_seed(noClone=false) {
+	return noClone ? global.__xorshift_state__ : global.__xorshift_state__.clone();
 }
 
 ///@func xrandom_set_seed(seed)
@@ -514,12 +567,25 @@ function xds_grid_shuffle(grid) {
 	global.__xorshift_state__.sds_grid_shuffle(grid);
 }
 
-///@func xarray_shuffle(array)
+///@func xarray_shuffle(array, [offset], [length])
 ///@param {array} array
-///@desc Replacement for array_shuffle(array)
-function xarray_shuffle(array) {
-	global.__xorshift_state__.sarray_shuffle(array);
+///@param {real} [offset]
+///@param {real} [length]
+///@desc Replacement for array_shuffle(array, [offset], [length])
+function xarray_shuffle(array, offset=0, length=infinity) {
+	return global.__xorshift_state__.sarray_shuffle(array, offset, length);
+}
+
+///@func xarray_shuffle_ext(array, [offset], [length])
+///@param {array} array
+///@param {real} [offset]
+///@param {real} [length]
+///@desc Replacement for array_shuffle_ext(array, [offset], [length])
+function xarray_shuffle_ext(array, offset=0, length=infinity) {
+	global.__xorshift_state__.sarray_shuffle_ext(array, offset, length);
 }
 
 // Initialize global seed randomly
 global.__xorshift_state__ = new XorWow();
+
+

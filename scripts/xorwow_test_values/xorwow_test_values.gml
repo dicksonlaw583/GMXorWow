@@ -7,7 +7,9 @@ function xorwow_test_values() {
 	var xowWowSeed = new XorWow();
 	xrandom_set_seed(xowWowSeed);
 	xrandomize();
-	assert_is(xrandom_get_seed(), xowWowSeed, "XorWow set seed failed");
+	assert_is(xrandom_get_seed(true), xowWowSeed, "XorWow set seed failed");
+	assert_isnt(xrandom_get_seed(), xowWowSeed, "XorWow get seed clone failed");
+	assert_equal(xrandom_get_seed(), xowWowSeed, "XorWow get seed clone content failed");
 	__xorwow_test_values__("XorWow", tries);
 	assert(is_int64(xowWowSeed.a), "XorWow core type drift a");
 	assert(is_int64(xowWowSeed.b), "XorWow core type drift b");
@@ -25,7 +27,9 @@ function xorwow_test_values() {
 	var xorShift32Seed = new XorShift32();
 	xrandom_set_seed(xorShift32Seed);
 	xrandomize();
-	assert_is(xrandom_get_seed(), xorShift32Seed, "XorShift32 set seed failed");
+	assert_is(xrandom_get_seed(true), xorShift32Seed, "XorShift32 set seed failed");
+	assert_isnt(xrandom_get_seed(), xorShift32Seed, "XorShift32 get seed clone failed");
+	assert_equal(xrandom_get_seed(), xorShift32Seed, "XorShift32 get seed clone content failed");
 	__xorwow_test_values__("XorShift32", tries);
 	assert(is_int64(xorShift32Seed.a), "XorShift32 core type drift a");
 	repeat (1000) {
@@ -38,7 +42,9 @@ function xorwow_test_values() {
 	var xorShift128Seed = new XorShift128();
 	xrandom_set_seed(xorShift128Seed);
 	xrandomize();
-	assert_is(xrandom_get_seed(), xorShift128Seed, "XorShift128 set seed failed");
+	assert_is(xrandom_get_seed(true), xorShift128Seed, "XorShift128 set seed failed");
+	assert_isnt(xrandom_get_seed(), xorShift128Seed, "XorShift128 get seed clone failed");
+	assert_equal(xrandom_get_seed(), xorShift128Seed, "XorShift128 get seed clone content failed");
 	__xorwow_test_values__("XorShift128", tries);
 	assert(is_int64(xorShift128Seed.a), "XorShift128 core type drift a");
 	assert(is_int64(xorShift128Seed.b), "XorShift128 core type drift b");
@@ -50,3 +56,5 @@ function xorwow_test_values() {
 	}
 	#endregion
 }
+
+

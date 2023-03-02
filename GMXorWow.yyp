@@ -1,4 +1,7 @@
 {
+  "resourceType": "GMProject",
+  "resourceVersion": "1.6",
+  "name": "GMXorWow",
   "resources": [
     {"id":{"name":"__xorwow_test_values__","path":"scripts/__xorwow_test_values__/__xorwow_test_values__.yy",},"order":5,},
     {"id":{"name":"__GMA_SETTINGS__","path":"scripts/__GMA_SETTINGS__/__GMA_SETTINGS__.yy",},"order":1,},
@@ -13,7 +16,6 @@
   ],
   "Options": [
     {"name":"HTML5","path":"options/html5/options_html5.yy",},
-    {"name":"Windows UWP","path":"options/windowsuap/options_windowsuap.yy",},
     {"name":"iOS","path":"options/ios/options_ios.yy",},
     {"name":"tvOS","path":"options/tvos/options_tvos.yy",},
     {"name":"macOS","path":"options/mac/options_mac.yy",},
@@ -34,26 +36,22 @@
     {"roomId":{"name":"rm_xorwow_test","path":"rooms/rm_xorwow_test/rm_xorwow_test.yy",},},
   ],
   "Folders": [
-    {"folderPath":"folders/Libraries.yy","order":16,"resourceVersion":"1.0","name":"Libraries","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Libraries/GMAssert.yy","order":1,"resourceVersion":"1.0","name":"GMAssert","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Libraries_config.yy","order":17,"resourceVersion":"1.0","name":"Libraries_config","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Libraries_config/GMAssert.yy","order":1,"resourceVersion":"1.0","name":"GMAssert","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Libraries_test.yy","order":18,"resourceVersion":"1.0","name":"Libraries_test","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Libraries_test/GMXorWow_test.yy","order":1,"resourceVersion":"1.0","name":"GMXorWow_test","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Libraries/GMXorWow.yy","order":2,"resourceVersion":"1.0","name":"GMXorWow","tags":[],"resourceType":"GMFolder",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Libraries_config","folderPath":"folders/Libraries_config.yy","order":17,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMAssert","folderPath":"folders/Libraries_config/GMAssert.yy","order":1,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Libraries_test","folderPath":"folders/Libraries_test.yy","order":18,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMXorWow_test","folderPath":"folders/Libraries_test/GMXorWow_test.yy","order":1,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Libraries","folderPath":"folders/Libraries.yy","order":16,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMAssert","folderPath":"folders/Libraries/GMAssert.yy","order":1,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"GMXorWow","folderPath":"folders/Libraries/GMXorWow.yy","order":2,},
   ],
   "AudioGroups": [
-    {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
+    {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"audiogroup_default","targets":-1,},
   ],
   "TextureGroups": [
-    {"isScaled":true,"compressFormat":"bz2","autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":-1,"resourceVersion":"1.3","name":"Default","resourceType":"GMTextureGroup",},
+    {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","isScaled":true,"compressFormat":"bz2","loadType":"default","directory":"","autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":-1,},
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2022.6.1.26",
+    "IDEVersion": "2022.0.0.19",
   },
-  "resourceVersion": "1.5",
-  "name": "GMXorWow",
-  "tags": [],
-  "resourceType": "GMProject",
 }
