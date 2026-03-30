@@ -4,7 +4,7 @@ This is a GameMaker 2022 implementation of [George Marsaglia's XorWow, XorShift3
 
 ## Requirements
 
-GameMaker 2022.1 or above. 2022 LTS is also supported.
+GameMaker 2022.0.3 LTS or above.
 
 ## Installation
 
@@ -54,3 +54,9 @@ y = seed.sirandom(room_height);
 | [`random(n)`](https://manual.yoyogames.com/#t=GameMaker_Language%2FGML_Reference%2FMaths_And_Numbers%2FNumber_Functions%2Frandom.htm) | `seed.srandom(n)` |
 | [`random_range(m, n)`](https://manual.yoyogames.com/#t=GameMaker_Language%2FGML_Reference%2FMaths_And_Numbers%2FNumber_Functions%2Frandom_range.htm) | `seed.srandom_range(m, n)` |
 
+### Backward Compatibility for v1.2.0 seeds initialized with strings
+
+If you are migrating from GMXorWow v1.2.0 or below and have seeds initialized with strings in your project, please note that the hash-to-state conversion scheme has changed in v1.3.0 to fix a bias towards small numbers for the first few numbers (see [issue \#2](https://github.com/dicksonlaw583/GMXorWow/issues/2)). If you need to maintain compatibility with legacy values (e.g. player save data with seed strings), you may take either approach below:
+
+- Set the `GMXORWOW_STRING_KEY_HASH_VERSION` macro to 0.
+- Add `, 0` to every seed constructor that needs legacy seeding (e.g. `new XorWow("foo")` -> `new XorWow("foo", 0)`).
