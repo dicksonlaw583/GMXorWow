@@ -175,11 +175,11 @@ function XorWow() : __XorSeed__() constructor {
 	///@desc Randomize this seed
 	static srandomize = function() {
 		var hash = sha1_string_unicode(keyboard_lastchar + string(get_timer()) + string(date_current_datetime()) + string(current_time) + keyboard_string);
-		a = __xorshift_hex_to_dec__(string_copy(hash, 1, 4));
-		b = __xorshift_hex_to_dec__(string_copy(hash, 5, 4));
-		c = __xorshift_hex_to_dec__(string_copy(hash, 9, 4));
-		d = __xorshift_hex_to_dec__(string_copy(hash, 13, 4));
-		e = __xorshift_hex_to_dec__(string_copy(hash, 17, 4));
+		a = __xorshift_hex_to_dec__(string_copy(hash, 1, 7));
+		b = __xorshift_hex_to_dec__(string_copy(hash, 9, 7));
+		c = __xorshift_hex_to_dec__(string_copy(hash, 17, 7));
+		d = __xorshift_hex_to_dec__(string_copy(hash, 25, 7));
+		e = __xorshift_hex_to_dec__(string_copy(hash, 33, 7));
 		counter = (a+b+c+d+e) & $FFFFFFFF;
 		if (a == 0 && b == 0 && c == 0 && d == 0) {
 			a = int64(1);
@@ -312,7 +312,7 @@ function XorShift32() : __XorSeed__() constructor {
 	///@desc Randomize this seed
 	static srandomize = function() {
 		var hash = sha1_string_unicode(keyboard_lastchar + string(get_timer()) + string(date_current_datetime()) + string(current_time) + keyboard_string);
-		a = __xorshift_hex_to_dec__(string_copy(hash, 1, 4));
+		a = __xorshift_hex_to_dec__(string_copy(hash, 1, 8));
 	};
 	
 	///@func __rand__()
@@ -403,10 +403,10 @@ function XorShift128() : __XorSeed__() constructor {
 	///@desc Randomize this seed
 	static srandomize = function() {
 		var hash = sha1_string_unicode(keyboard_lastchar + string(get_timer()) + string(date_current_datetime()) + string(current_time) + keyboard_string);
-		a = __xorshift_hex_to_dec__(string_copy(hash, 1, 4));
-		b = __xorshift_hex_to_dec__(string_copy(hash, 5, 4));
-		c = __xorshift_hex_to_dec__(string_copy(hash, 9, 4));
-		d = __xorshift_hex_to_dec__(string_copy(hash, 13, 4));
+		a = __xorshift_hex_to_dec__(string_copy(hash, 1, 7));
+		b = __xorshift_hex_to_dec__(string_copy(hash, 9, 7));
+		c = __xorshift_hex_to_dec__(string_copy(hash, 17, 7));
+		d = __xorshift_hex_to_dec__(string_copy(hash, 25, 7));
 		if (a == 0 && b == 0 && c == 0 && d == 0) {
 			a = int64(1);
 			b = int64(2);
