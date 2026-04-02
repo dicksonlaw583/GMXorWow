@@ -146,6 +146,7 @@ function __xorshift_hex_to_dec__(hex) {
 /**
 - If given no arguments: Initialize based on current date and current_time (non-deterministic).
 - If given 1 string argument: Initialize based on SHA1 hash of the given string (deterministic).
+- If given 1 string argument and 1 numeric argument: Initialize based on SHA1 hash of the given string and version number (deterministic).
 - If given 1 array or struct argument: Initialize directly to the seed numbers given (deterministic).
 - If given 6 numeric arguments: Initialize directly to the 6 seed numbers (deterministic).
 */
@@ -228,17 +229,29 @@ function XorWow() : __XorSeed__() constructor {
 		case 0:
 			srandomize();
 		break;
-		case 1:
+		case 1: case 2:
 			var seedInput = argument[0];
+			var hashVersion = (argument_count == 1) ? GMXORWOW_STRING_KEY_HASH_VERSION : argument[1];
 			switch (typeof(seedInput)) {
 				case "string":
 					var hash = sha1_string_unicode(seedInput);
-					a = __xorshift_hex_to_dec__(string_copy(hash, 1, 4));
-					b = __xorshift_hex_to_dec__(string_copy(hash, 5, 4));
-					c = __xorshift_hex_to_dec__(string_copy(hash, 9, 4));
-					d = __xorshift_hex_to_dec__(string_copy(hash, 13, 4));
-					e = __xorshift_hex_to_dec__(string_copy(hash, 17, 4));
-					counter = (a+b+c+d+e) & $FFFFFFFF;
+					switch (hashVersion) {
+						case 0:
+							a = __xorshift_hex_to_dec__(string_copy(hash, 1, 4));
+							b = __xorshift_hex_to_dec__(string_copy(hash, 5, 4));
+							c = __xorshift_hex_to_dec__(string_copy(hash, 9, 4));
+							d = __xorshift_hex_to_dec__(string_copy(hash, 13, 4));
+							e = __xorshift_hex_to_dec__(string_copy(hash, 17, 4));
+							counter = (a+b+c+d+e) & $FFFFFFFF;
+						break;
+						default:
+							a = __xorshift_hex_to_dec__(string_copy(hash, 1, 7));
+							b = __xorshift_hex_to_dec__(string_copy(hash, 9, 7));
+							c = __xorshift_hex_to_dec__(string_copy(hash, 17, 7));
+							d = __xorshift_hex_to_dec__(string_copy(hash, 25, 7));
+							e = __xorshift_hex_to_dec__(string_copy(hash, 33, 7));
+							counter = (a+b+c+d+e) & $FFFFFFFF;
+					}
 					break;
 				case "array":
 					a = int64(seedInput[0]);
@@ -268,7 +281,7 @@ function XorWow() : __XorSeed__() constructor {
 			counter = int64(argument[5]);
 			break;
 		default:
-			show_error("Expected 0, 1 or 6 arguments, got " + string(argument_count) + ".", true);
+			show_error("Expected 0, 1, 2 or 6 arguments, got " + string(argument_count) + ".", true);
 	}
 	if (a == 0 && b == 0 && c == 0 && d == 0) {
 		a = int64(1);
@@ -283,6 +296,7 @@ function XorWow() : __XorSeed__() constructor {
 /**
 - If given no arguments: Initialize based on current date and current_time (non-deterministic).
 - If given 1 string argument: Initialize based on SHA1 hash of the given string (deterministic).
+- If given 1 string argument and 1 numeric argument: Initialize based on SHA1 hash of the given string and version number (deterministic).
 - If given 1 array or struct argument: Initialize directly to the seed number given (deterministic).
 - If given 1 numeric argument: Initialize directly to the seed number (deterministic).
 */
@@ -348,12 +362,19 @@ function XorShift32() : __XorSeed__() constructor {
 		case 0:
 			srandomize();
 		break;
-		case 1:
+		case 1: case 2:
 			var seedInput = argument[0];
+			var hashVersion = (argument_count == 1) ? GMXORWOW_STRING_KEY_HASH_VERSION : argument[1];
 			switch (typeof(seedInput)) {
 				case "string":
 					var hash = sha1_string_unicode(seedInput);
-					a = __xorshift_hex_to_dec__(string_copy(hash, 1, 4));
+					switch (hashVersion) {
+						case 0:
+							a = __xorshift_hex_to_dec__(string_copy(hash, 1, 4));
+						break;
+						default:
+							a = __xorshift_hex_to_dec__(string_copy(hash, 1, 8));
+					}
 					break;
 				case "array":
 					a = int64(seedInput[0]);
@@ -364,7 +385,7 @@ function XorShift32() : __XorSeed__() constructor {
 			}
 		break;
 		default:
-			show_error("Expected 0 or 1 argument, got " + string(argument_count) + ".", true);
+			show_error("Expected 0, 1, or 2 arguments, got " + string(argument_count) + ".", true);
 	}
 }
 
@@ -373,6 +394,7 @@ function XorShift32() : __XorSeed__() constructor {
 /**
 - If given no arguments: Initialize based on current date and current_time (non-deterministic).
 - If given 1 string argument: Initialize based on SHA1 hash of the given string (deterministic).
+- If given 1 string argument and 1 numeric argument: Initialize based on SHA1 hash of the given string and version number (deterministic).
 - If given 1 array or struct argument: Initialize directly to the seed numbers given (deterministic).
 - If given 4 numeric arguments: Initialize directly to the 4 seed numbers (deterministic).
 */
@@ -451,15 +473,25 @@ function XorShift128() : __XorSeed__() constructor {
 		case 0:
 			srandomize();
 		break;
-		case 1:
+		case 1: case 2:
 			var seedInput = argument[0];
+			var hashVersion = (argument_count == 1) ? GMXORWOW_STRING_KEY_HASH_VERSION : argument[1];
 			switch (typeof(seedInput)) {
 				case "string":
 					var hash = sha1_string_unicode(seedInput);
-					a = __xorshift_hex_to_dec__(string_copy(hash, 1, 4));
-					b = __xorshift_hex_to_dec__(string_copy(hash, 5, 4));
-					c = __xorshift_hex_to_dec__(string_copy(hash, 9, 4));
-					d = __xorshift_hex_to_dec__(string_copy(hash, 13, 4));
+					switch (hashVersion) {
+						case 0:
+							a = __xorshift_hex_to_dec__(string_copy(hash, 1, 4));
+							b = __xorshift_hex_to_dec__(string_copy(hash, 5, 4));
+							c = __xorshift_hex_to_dec__(string_copy(hash, 9, 4));
+							d = __xorshift_hex_to_dec__(string_copy(hash, 13, 4));
+						break;
+						default:
+							a = __xorshift_hex_to_dec__(string_copy(hash, 1, 7));
+							b = __xorshift_hex_to_dec__(string_copy(hash, 9, 7));
+							c = __xorshift_hex_to_dec__(string_copy(hash, 17, 7));
+							d = __xorshift_hex_to_dec__(string_copy(hash, 25, 7));
+					}
 					break;
 				case "array":
 					a = int64(seedInput[0]);
@@ -482,7 +514,7 @@ function XorShift128() : __XorSeed__() constructor {
 			d = int64(argument[3]);
 			break;
 		default:
-			show_error("Expected 0, 1 or 4 arguments, got " + string(argument_count) + ".", true);
+			show_error("Expected 0, 1, 2 or 4 arguments, got " + string(argument_count) + ".", true);
 	}
 	if (a == 0 && b == 0 && c == 0 && d == 0) {
 		a = int64(1);

@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "xorwow_test_seeding",
+  "name": "__GMXORWOW_CONFIG__",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "GMXorWow_test",
-    "path": "folders/Libraries_test/GMXorWow_test.yy",
+    "name": "GMXorWow",
+    "path": "folders/Libraries_config/GMXorWow.yy",
   },
 }
